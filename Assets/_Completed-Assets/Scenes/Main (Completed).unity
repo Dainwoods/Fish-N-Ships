@@ -228,6 +228,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c74f553b118f94bfcbe70a5cdcc48114, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &222402423 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 152844, guid: a02cd56951325b645973551f0bae4cc0, type: 2}
+  m_PrefabInternal: {fileID: 669821830}
 --- !u!1 &251314637
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +321,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1338097493
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c4b2e2c9f19dd1e43b1f413c0c8b3076, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -386,6 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordfish: {fileID: 1105356217198624, guid: a74da44fe465e2e4496a0c82c3aeb792, type: 2}
   player: {fileID: 251314637}
+  point: {fileID: 222402423}
 --- !u!1 &278051917
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +785,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1105356217198624, guid: a74da44fe465e2e4496a0c82c3aeb792,
         type: 2}
+    - target: {fileID: 114462946220179830, guid: b1f5b8c5d3dd0b344bcf50d292e8debf,
+        type: 2}
+      propertyPath: point
+      value: 
+      objectReference: {fileID: 222402423}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1f5b8c5d3dd0b344bcf50d292e8debf, type: 2}
   m_IsPrefabParent: 0
