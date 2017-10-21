@@ -68,6 +68,7 @@ public class CompletePlayerController : MonoBehaviour {
 
 	}
 
+
 	//This function updates the text displaying the number of objects we've collected and displays our victory message if we've collected all of them.
 	void SetCountText() {
 		//Set the text property of our our countText object to "Count: " followed by the number stored in our count variable.
