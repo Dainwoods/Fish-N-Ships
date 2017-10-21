@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour {
                 float rand = Random.Range(0, 4);
                 if(rand > 1) {
                     GameObject sf = (GameObject)Instantiate(swordfish);
-                    sf.GetComponent<SwordfishAttack>().startPos(playX + x + .5f, playY + y + .5f, this.gameObject);
+                    sf.GetComponent<SwordfishAttack>().startPos(playX + x + 0f, playY + y + 0f, this.gameObject);
                 }
             }
         }

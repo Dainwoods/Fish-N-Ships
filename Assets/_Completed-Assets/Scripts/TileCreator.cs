@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TileCreator : MonoBehaviour {
 
-    private int[][] tileArr;
+    public static int[][] tileArr;
     private GameObject[][] tiles;
     public GameObject tile;
 

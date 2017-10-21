@@ -24,12 +24,14 @@ public class SwordfishAttack : MonoBehaviour {
     void Update () {
         float timer = Time.deltaTime;
 		if(transform.localScale.x < 1) {
-            transform.localScale = new Vector3(1, 1, 1) * growScale * Time.deltaTime;
+            timer += Time.deltaTime;
+            transform.localScale += new Vector3(1, 1, 1) * .5f * Time.deltaTime;
         }
         else if(!grounded){
             timer = Time.deltaTime;
             grounded = true;
             sprRen.sprite = swordfish;
+            swordCol.isTrigger = true;
             if(swordCol.IsTouching(playCol)) {
                 GetComponent<PlayerState>().takeDamage();
             }
@@ -44,6 +46,6 @@ public class SwordfishAttack : MonoBehaviour {
         playCol = player.GetComponent<Collider2D>();
         Vector2 pos = new Vector2(x, y);
         transform.position = pos;
-        growScale = .05f;
+        growScale = 2;
     }
 }
