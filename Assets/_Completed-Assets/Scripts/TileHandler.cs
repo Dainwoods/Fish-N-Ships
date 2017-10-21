@@ -10,10 +10,11 @@ public class TileHandler : MonoBehaviour {
     public Sprite wallSpr;
 
     private bool configured = false;
+    private SpriteRenderer sprRen;
 
     void Start() {
         if(!configured) {
-            SpriteRenderer sprRen = GetComponent<SpriteRenderer>();
+            sprRen = GetComponent<SpriteRenderer>();
             collider.enabled = false;
             sprRen.sprite = floorSpr;
         }
@@ -21,7 +22,7 @@ public class TileHandler : MonoBehaviour {
 
     public void configure(int wall) {
         configured = true;
-        SpriteRenderer sprRen = GetComponent<SpriteRenderer>();
+        sprRen = GetComponent<SpriteRenderer>();
         if(wall == 0) {
             collider.enabled = true;
             sprRen.sprite = wallSpr;

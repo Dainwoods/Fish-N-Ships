@@ -23,10 +23,11 @@ public class TileCreator : MonoBehaviour {
     private float upTileDis;
     private float downTileDis;
 
-	// Use this for initialization
-	void Start () {
-        int width = 100;
-        int height = 100;
+    private int width = 100;
+    private int height = 100;
+
+    // Use this for initialization
+    void Start() {
         tileArr = new int[width][];
         tiles = new GameObject[width][];
         for(int i = 0; i < width; i++) {
@@ -38,10 +39,12 @@ public class TileCreator : MonoBehaviour {
                     tileArr[i][j] = 0;
                 }
                 else {
-                    tileArr[i][j] = Random.Range(0, 10);
+                    tileArr[i][j] = Random.Range(0, 100);
                 }
             }
         }
+
+        GetComponent<EnemySpawner>().tileUpdate(tileArr);
 
         int maxX = 16;
         leftTileDis = ((maxX / 2) + 2.5f);
@@ -82,14 +85,14 @@ public class TileCreator : MonoBehaviour {
                 }
             }
         }
-	}
+    }
 
     private void Update() {
         float x = transform.position.x;
         float y = transform.position.y;
-        if(Mathf.Abs(x - tlTilePos.x) > leftTileDis) {
-            for(int i = (int) tlTileArr.y; i >= (int) blTileArr.y; i--) {
-                GameObject obj = tiles[(int) tlTileArr.x][i];
+        if(Mathf.Abs(x - tlTilePos.x) > leftTileDis && trTileArr.x < width - 1) {
+            for(int i = (int)tlTileArr.y; i >= (int)blTileArr.y; i--) {
+                GameObject obj = tiles[(int)tlTileArr.x][i];
                 Vector3 pos = new Vector3(trTilePos.x + 1, obj.transform.position.y, 0);
                 obj.transform.position = pos;
                 int con = tileArr[(int)trTileArr.x + 1][i];
@@ -108,7 +111,7 @@ public class TileCreator : MonoBehaviour {
             brTilePos.x += 1;
         }
 
-        if(Mathf.Abs(x - trTilePos.x) > rightTileDis) {
+        if(Mathf.Abs(x - trTilePos.x) > rightTileDis && tlTileArr.x > 0) {
             for(int i = (int)trTileArr.y; i >= (int)brTileArr.y; i--) {
                 GameObject obj = tiles[(int)trTileArr.x][i];
                 Vector3 pos = new Vector3(tlTilePos.x - 1, obj.transform.position.y, 0);
@@ -129,7 +132,7 @@ public class TileCreator : MonoBehaviour {
             brTilePos.x -= 1;
         }
 
-        if(Mathf.Abs(y - tlTilePos.y) > upTileDis) {
+        if(Mathf.Abs(y - tlTilePos.y) > upTileDis && blTileArr.y > 0) {
             for(int i = (int)tlTileArr.x; i <= (int)trTileArr.x; i++) {
                 GameObject obj = tiles[i][(int)tlTileArr.y];
                 Vector3 pos = new Vector3(obj.transform.position.x, blTilePos.y - 1, 0);
@@ -150,7 +153,7 @@ public class TileCreator : MonoBehaviour {
             brTilePos.y -= 1;
         }
 
-        if(Mathf.Abs(y - blTilePos.y) > downTileDis) {
+        if(Mathf.Abs(y - blTilePos.y) > downTileDis && tlTileArr.y < height - 1) {
             for(int i = (int)blTileArr.x; i <= (int)brTileArr.x; i++) {
                 GameObject obj = tiles[i][(int)blTileArr.y];
                 Vector3 pos = new Vector3(obj.transform.position.x, tlTilePos.y + 1, 0);
