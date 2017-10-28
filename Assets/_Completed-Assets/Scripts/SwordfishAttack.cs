@@ -9,14 +9,12 @@ public class SwordfishAttack : MonoBehaviour {
     public Sprite swordfish;
 
     private Collider2D playCol;
-    private float growScale;
     private bool grounded;
     SpriteRenderer sprRen;
 
     void Start() {
         grounded = false;
         transform.localScale = new Vector3(0, 0, 0);
-        growScale = 0;
         sprRen = GetComponent<SpriteRenderer>();
     }
 
@@ -51,6 +49,5 @@ public class SwordfishAttack : MonoBehaviour {
         playCol = player.GetComponent<Collider2D>();
         Vector2 pos = new Vector2(x, y);
         transform.position = pos;
-        growScale = 2;
     }
 }

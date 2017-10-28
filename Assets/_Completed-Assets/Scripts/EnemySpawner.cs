@@ -9,8 +9,6 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject player;
     public GameObject point;
 
-    private float timer;
-
 	// Use this for initialization
 	void Start () {
         Invoke("spawnEnemies", .3f);
@@ -18,14 +16,12 @@ public class EnemySpawner : MonoBehaviour {
 	
 
     public void spawnEnemies() {
-        timer = Time.deltaTime;
         int playX = (int)player.transform.position.x;
         int playY = (int)player.transform.position.y;
         float randX = (int)Random.Range(-9, 9) + 0f;
         float randY = (int)Random.Range(-7, 7) + 0f;
         GameObject sf = (GameObject)Instantiate(swordfish);
         sf.GetComponent<SwordfishAttack>().startPos(playX + randX + 0f, playY + randY + 0f, gameObject);
-        
         /*for(int x = -9; x < 9; x++) {
             for(int y = -7; y < 7; y++) {
                 float rand = Random.Range(0, 4);
@@ -38,7 +34,7 @@ public class EnemySpawner : MonoBehaviour {
         Invoke("spawnEnemies", Random.Range(0f, .4f));
     }
 
-    public void tileUpdate(int[][] tiles) {
+    public void tileUpdate(int[][][] tiles) {
 
     }
 }
