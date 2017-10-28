@@ -315,8 +315,8 @@ public class TileCreator : MonoBehaviour {
     private void setTileImage(int edgeWidth, int edgeHeight) {
 
         int[] binArr = new int[4];
-        for(int i = edgeWidth; i < width - edgeWidth; i++) {
-            for(int j = edgeHeight; j < height - edgeHeight; j++) {
+        for(int i = edgeWidth - 1; i < width - edgeWidth + 1; i++) {
+            for(int j = edgeHeight - 1; j < height - edgeHeight + 1; j++) {
                 if(tileArr[i][j][0] == 1) {
                     if(tileArr[i + 1][j][0] == 0 || tileArr[i + 1][j][0] == 2) {
                         if(tileArr[i + 1][j][0] == 0) {
@@ -355,7 +355,7 @@ public class TileCreator : MonoBehaviour {
                         binArr[2] = 0;
                     }
                     if(tileArr[i][j + 1][0] == 0 || tileArr[i][j + 1][0] == 2) {
-                        if(tileArr[i][j][0] == 0) {
+                        if(tileArr[i][j + 1][0] == 0) {
                             tileArr[i][j][2] = 0;
                         }
                         else {

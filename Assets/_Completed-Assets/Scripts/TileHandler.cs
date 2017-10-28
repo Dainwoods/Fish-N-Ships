@@ -42,7 +42,6 @@ public class TileHandler : MonoBehaviour {
         if(wall[0] == 0) {
             collider.enabled = true;
             sprRen.sprite = waterSpr;
-
         }
         else if(wall[0] == 1){
             collider.enabled = false;

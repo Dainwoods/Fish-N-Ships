@@ -18,10 +18,17 @@ public class EnemySpawner : MonoBehaviour {
     public void spawnEnemies() {
         int playX = (int)player.transform.position.x;
         int playY = (int)player.transform.position.y;
-        float randX = (int)Random.Range(-9, 9) + 0f;
-        float randY = (int)Random.Range(-7, 7) + 0f;
-        GameObject sf = (GameObject)Instantiate(swordfish);
-        sf.GetComponent<SwordfishAttack>().startPos(playX + randX + 0f, playY + randY + 0f, gameObject);
+        float randX = Random.Range(-9, 9) + 0f;
+        float randY = Random.Range(-7, 7) + 0f;
+        if (TileCreator.tileArr[58 + ((int)(playX + randX))][56 + ((int)(playY + randY))][0] == 0) {
+            Invoke("spawnEnemies", Random.Range(0f, .4f));
+        }
+        else {
+            GameObject sf = (GameObject)Instantiate(swordfish);
+            sf.GetComponent<SwordfishAttack>().startPos(playX + randX + 0f, playY + randY + 0f, gameObject);
+            Invoke("spawnEnemies", Random.Range(0f, .4f));
+        }
+        
         /*for(int x = -9; x < 9; x++) {
             for(int y = -7; y < 7; y++) {
                 float rand = Random.Range(0, 4);
@@ -31,7 +38,6 @@ public class EnemySpawner : MonoBehaviour {
                 }
             }
         }*/
-        Invoke("spawnEnemies", Random.Range(0f, .4f));
     }
 
     public void tileUpdate(int[][][] tiles) {
