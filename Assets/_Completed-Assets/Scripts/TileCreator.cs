@@ -312,6 +312,64 @@ public class TileCreator : MonoBehaviour {
         return false;
     }
 
+    private void setTileImageNew(int edgeWidth, int edgeHeight) {
+        int[] binArr = new int[8];
+        for(int i = edgeWidth - 1; i < width - edgeWidth + 1; i++) {
+            for(int j = edgeHeight - 1; j < height - edgeHeight + 1; j++) {
+                if(tileArr[i][j][0] == 1) {
+                    int binCounter = 0;
+                    int curTile;
+                    for(int xOffset = -1; xOffset < 2; xOffset++) {
+                        for(int yOffset = -1; yOffset < 2; yOffset++) {
+                            if(xOffset != 0 || yOffset != 0) {
+                                curTile = tileArr[i + xOffset][j + yOffset][0];
+                                if(curTile == 1) {
+                                    if(binCounter == 0) {
+                                        if(tileArr[i][j - 1][0] == 1 && tileArr[i - 1][j][0] == 1) {
+                                            binArr[binCounter] = 1;
+                                        }
+                                    }
+                                    else if(binCounter == 2) {
+                                        if(tileArr[i][j - 1][0] == 1 && tileArr[i + 1][j][0] == 1) {
+                                            binArr[binCounter] = 1;
+                                        }
+                                    }
+                                    else if(binCounter == 5) {
+                                        if(tileArr[i][j + 1][0] == 1 && tileArr[i - 1][j][0] == 1) {
+                                            binArr[binCounter] = 1;
+                                        }
+                                    }
+                                    else if(binCounter == 7) {
+                                        if(tileArr[i][j + 1][0] == 1 && tileArr[i + 1][j][0] == 1) {
+                                            binArr[binCounter] = 1;
+                                        }
+                                    }
+                                    else {
+                                        binArr[binCounter] = 1;
+                                    }
+
+                                    if(curTile == 0) {
+                                        tileArr[i][j][2] = 0;
+                                    }
+                                    else {
+                                        tileArr[i][j][2] = 1;
+                                    }
+                                    binCounter++;
+                                }
+                            }
+                        }
+                    }
+                    tileArr[i][j][1] = (1 * binArr[0]) + (2 * binArr[1]) + (4 * binArr[2]) + (8 * binArr[3]) + (16 * binArr[4]) + (32 * binArr[5]) + (64 * binArr[6]) + (128 * binArr[7]);
+                }
+                else if(tileArr[i][j][0] == 0) {
+                    tileArr[i][j][1] = 0;
+                }else {
+                    tileArr[i][j][1] = 0;
+                }
+            }
+        }
+    }
+
     private void setTileImage(int edgeWidth, int edgeHeight) {
 
         int[] binArr = new int[4];
