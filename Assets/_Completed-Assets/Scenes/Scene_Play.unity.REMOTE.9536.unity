@@ -392,6 +392,8 @@ MonoBehaviour:
   swordfish: {fileID: 1105356217198624, guid: a74da44fe465e2e4496a0c82c3aeb792, type: 2}
   player: {fileID: 251314637}
   point: {fileID: 222402423}
+  _hammerhead: {fileID: 1042103669877906, guid: 0bc3da998d2b5c746a34eb8ebc5d9cf0,
+    type: 2}
 --- !u!114 &251314645
 MonoBehaviour:
   m_ObjectHideFlags: 0
