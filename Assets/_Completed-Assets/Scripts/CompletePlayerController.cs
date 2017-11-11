@@ -13,10 +13,18 @@ public class CompletePlayerController : MonoBehaviour {
 	private Rigidbody2D rb2d;		//Store a reference to the Rigidbody2D component required to use 2D Physics.
 	private int count;				//Integer to store the number of pickups collected so far.
 
+    private int rockCounter;
+    private int woodCounter;
+    private int boneCounter;
+
 	// Use this for initialization
 	void Start() {
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
 		rb2d = GetComponent<Rigidbody2D> ();
+
+        rockCounter = 0;
+        woodCounter = 0;
+        boneCounter = 0;
 
 		//Initialize count to zero.
 		count = 0;
@@ -51,13 +59,42 @@ public class CompletePlayerController : MonoBehaviour {
         //rb2d.AddForce (movement * speed);
     }
 
+    public int getBones() {
+        return boneCounter;
+    }
+    public void setBones(int bone) {
+        boneCounter = bone;
+    }
+
+    public int getWood() {
+        return woodCounter;
+    }
+    public void setWood(int wood) {
+        woodCounter = wood;
+    }
+
+    public int getRocks() {
+        return rockCounter;
+    }
+    public void setRocks(int rock) {
+        rockCounter = rock;
+    }
+
 	//OnTriggerEnter2D is called whenever this object overlaps with a trigger collider.
 	void OnTriggerEnter2D(Collider2D other) {
 		//Check the provided Collider2D parameter other to see if it is tagged "PickUp", if it is...
 		if (other.gameObject.CompareTag ("PickUp")) {
 			//... then set the other object we just collided with to inactive.
 			other.gameObject.SetActive(false);
-			
+			if(other.gameObject.name == "RockPickup") {
+                rockCounter++;
+            }
+            else if(other.gameObject.name == "WoodPickup") {
+                woodCounter++;
+            }
+            else if(other.gameObject.name == "BonePickup") {
+                boneCounter++;
+            }
 			//Add one to the current value of our count variable.
 			count = count + 1;
 			
@@ -72,7 +109,7 @@ public class CompletePlayerController : MonoBehaviour {
 	//This function updates the text displaying the number of objects we've collected and displays our victory message if we've collected all of them.
 	void SetCountText() {
 		//Set the text property of our our countText object to "Count: " followed by the number stored in our count variable.
-		countText.text = "Count: " + count.ToString ();
+		countText.text = "Bones: " + boneCounter + "\nRocks: " + rockCounter + "\nWood " + woodCounter;
 
 		//Check if we've collected all 12 pickups. If we have...
 		if (count >= 12)
