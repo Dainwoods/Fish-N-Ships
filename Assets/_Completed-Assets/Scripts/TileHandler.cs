@@ -8,32 +8,27 @@ public class TileHandler : MonoBehaviour {
     public BoxCollider2D collider;
     public Sprite grassSpr;
     public Sprite waterSpr;
-    public Sprite S0000;
-    public Sprite S0001;
-    public Sprite S0010;
-    public Sprite S0011;
-    public Sprite S0100;
-    public Sprite S0101;
-    public Sprite S0110;
-    public Sprite S0111;
-    public Sprite S1000;
-    public Sprite S1001;
-    public Sprite S1010;
-    public Sprite S1011;
-    public Sprite S1100;
-    public Sprite S1101;
-    public Sprite S1110;
-    public Sprite S1111;
 
     private bool configured = false;
     private SpriteRenderer sprRen;
+    private Sprite[] sandToWater;
+
+    public GameObject rock;
+    public GameObject tree;
+
 
     void Start() {
+        
+
         if(!configured) {
             sprRen = GetComponent<SpriteRenderer>();
             collider.enabled = false;
             sprRen.sprite = grassSpr;
         }
+    }
+
+    public void setUpSprites(Sprite[] wSprite) {
+        sandToWater = wSprite;
     }
 
     public void configure(int[] wall) {
@@ -46,66 +41,30 @@ public class TileHandler : MonoBehaviour {
         else if(wall[0] == 1){
             collider.enabled = false;
             if(wall[2] == 0) {
-                switch(wall[1]) {
-                    case 0:
-                        sprRen.sprite = S0000;
-                        break;
-                    case 1:
-                        sprRen.sprite = S0001;
-                        break;
-                    case 2:
-                        sprRen.sprite = S0010;
-                        break;
-                    case 3:
-                        sprRen.sprite = S0011;
-                        break;
-                    case 4:
-                        sprRen.sprite = S0100;
-                        break;
-                    case 5:
-                        sprRen.sprite = S0101;
-                        break;
-                    case 6:
-                        sprRen.sprite = S0110;
-                        break;
-                    case 7:
-                        sprRen.sprite = S0111;
-                        break;
-                    case 8:
-                        sprRen.sprite = S1000;
-                        break;
-                    case 9:
-                        sprRen.sprite = S1001;
-                        break;
-                    case 10:
-                        sprRen.sprite = S1010;
-                        break;
-                    case 11:
-                        sprRen.sprite = S1011;
-                        break;
-                    case 12:
-                        sprRen.sprite = S1100;
-                        break;
-                    case 13:
-                        sprRen.sprite = S1101;
-                        break;
-                    case 14:
-                        sprRen.sprite = S1110;
-                        break;
-                    case 15:
-                        sprRen.sprite = S1111;
-                        break;
-                    default:
-                        break;
-                }
+                sprRen.sprite = sandToWater[wall[1]];
             }
             else {
-                sprRen.sprite = S0000;
+                sprRen.sprite = sandToWater[255];
             }
         }
         else {
             collider.enabled = false;
             sprRen.sprite = grassSpr;
+        }
+
+        if(wall[3] == 1) {
+            GameObject rockObj = (GameObject)Instantiate(rock);
+            Vector2 pos = transform.position;
+            rockObj.transform.position = pos;
+            collider.enabled = true;
+            rockObj.name = "rock" + pos.x + pos.y;
+        }
+        else if(wall[3] == 2) {
+            GameObject treeObj = (GameObject)Instantiate(tree);
+            Vector2 pos = transform.position;
+            treeObj.transform.position = pos;
+            collider.enabled = true;
+            treeObj.name = "tree" + pos.x + pos.y;
         }
     }
 }
